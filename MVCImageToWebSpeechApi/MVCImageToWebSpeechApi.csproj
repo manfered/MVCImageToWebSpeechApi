@@ -191,6 +191,7 @@
     <Content Include="x86\libtesseract304.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\MVCImageToWebSpeechApi.gilasak.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
