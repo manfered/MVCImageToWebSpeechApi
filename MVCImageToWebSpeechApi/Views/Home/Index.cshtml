@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "ImageToWebSpeech";
+}
+
+<div class="jumbotron">
+    <h1>Image To Web Speech</h1>
+    <p class="lead">
+        ImageToWebSpeech combines OCR and textToSpeech ability. ImageToSpeech uses Apache Licensed <b>Tesseract</b> optical character recognition engine for the OCR processing,
+        and <b>WEB speech API</b> for text to speech ability.
+    </p>
+    <p>
+        ImageToSpeech contains three parts :
+        <ul>
+            <li>Asynchronous Image Upload</li>
+            <li>Optical Character Recognition</li>
+            <li>Text To Speech</li>
+        </ul>
+    </p>
+    <p>** Ocr engine is able to detect multiple languages but for testing environment ocr only accepts ENGLISH texts.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>ASP.NET MVC</h2>
+        <p>.Net framework speech library provides the ability to transform texts to audio files</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Ajax/jQuery</h2>
+        <p>Ajax forms helps asynchronously upload the image files and perform the tasks.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>JavaSctipr</h2>
+        <p>Helps using Web Speesh API behind the scene.</p>
+    </div>
+</div>
+
+<!-- showing the result of uploaded image file -->
+<div class="row" id="uploadResultBox">
+
+</div>
+
+
+<!-- Image upload form box -->
+@using (Ajax.BeginForm("Index", "Home", new AjaxOptions() { HttpMethod = "POST" }, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row" id="uploadFormBox">
+        <div class="col-xs-12">
+            <label for="fileUploadInput" class="custom-file-upload">
+                Upload File
+            </label>
+            <input id="fileUploadInput" type="file" name="files" />
+        </div>
+    </div>
+
+
+    <div class="form-group" id="uploadProgressBox">
+        <div class="progress col-md-2" id="uploadProgressBar">
+            <div class="progress-bar">0%</div>
+        </div>
+        <div id="fileUploadStatus"></div>
+    </div>
+
+}
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="div-center">
+
+            <h3>Rate</h3>
+            <input type="range" min="0.5" max="2" value="1" step="0.1" id="rate" class="form-control">
+            <div class="rate-value div-center">1</div>
+            <div class="clearfix"></div>
+
+            <div>
+
+            </div>
+            <div>
+                <h3>Pitch</h3>
+                <input type="range" min="0" max="2" value="1" step="0.1" id="pitch" class="form-control">
+                <div class="pitch-value div-center">1</div>
+                <div class="clearfix"></div>
+            </div>
+            <div>
+                <h3>Languages</h3>
+                <select class="selectInput form-control"></select>
+            </div>
+            
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Actions</h3>
+        <div class="div-center">
+            <button id="replay" type="submit" class="btn btn-danger btn-lg">Relay &raquo;</button>
+        </div>
+        <div class="div-center">
+            <p><a class="btn btn-info btn-lg" id="refreshButton">UpLoad Another Image &raquo;</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/Speech.js"></script>
+    <script src="~/Scripts/ImageToSpeech.js"></script>
+}
